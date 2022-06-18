@@ -1,12 +1,11 @@
-<div class="form-group">
-    <input class="form-control form-control-lg" 
-    type="text" placeholder="Category Name" id="name" name="name" aria-label="Category Name" value="{{ old('name') }}">
 
-</div>
-<div class="form-group">
-    <input class="form-control form-control-lg" 
-    type="text" placeholder="Category Slug" id="slug" name="slug" label="Category Slug" aria-label="Category Slug" value="{{ old('slug') }}">
-</div>
+    <x-forms.input id="name" type="text" name="name" lable="Category Name"  value="{{ old('name') }}" placeholder="Category Name"/>
+
+
+
+    <x-forms.input id="slug" type="text" name="slug" lable="Category Slug"  value="{{ old('slug') }}" placeholder="Category Slug" />
+
+
 <div class="form-group">
     <label for="description">Description</label>
     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" @error('description') is-invalid @enderror>{{ old('description') }}</textarea>
@@ -15,16 +14,8 @@
     @enderror
 </div>
 <div class="form-group">
-    <select class="form-select" aria-label="Select Parent ID" name="parent_id">
-        <option value="">No Parent</option>
-        @foreach ($parents as $parent)
-        
-        <option value="{{$parent->id}}">{{$parent->name}}</option>
-       
-
-
-        @endforeach
-      </select>
+    <x-forms.select id="parent_id" aria-label="Select Parent ID" name="parent_id" label="Parent" :options="$parents->pluck('name', 'id')" :selected="$category->parent_id" />
+    
 </div>
 <div class="form-group">
     <label for="art_file">Art File</label>
