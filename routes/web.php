@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.dashboard');
-});
+    return view('layouts.home');
+})->name('home');
 
 Route::get('/categories',[CategoriesController::class,'index'])->name('categories.index'); // new form
 Route::get('/categories/create',[CategoriesController::class,'create'])->name('categories.create'); // new form
