@@ -41,7 +41,14 @@ class CategoriesController extends Controller
     // Actions
     public function index()
     {
-        $categories=DB::table('categories')->get();
+        $categories = Category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
+        ->select([
+            'categories.*',
+            'parents.name as parent_name',
+        ])->paginate(5);
+
+//return  $categories;
+      //  $categories=DB::table('categories')->get();
         //dd($categories);
        // count($categories);
         //return  $categories;

@@ -31,7 +31,7 @@
                 <td><a href="{{route('categories.show',$category->id)}}">{{ $category->name }}</a></td>
                 <td>{{ $category->slug }}</td>
                 <td>@if ($category->parent_id != null)
-                    {{ $category->parent_id  }}
+                    {{ $category->parent_name  }}
                 @else
                     No Parent
                 @endif</td>
@@ -55,7 +55,9 @@
             @endforeach
         </tbody>
     </table>
+   
 </div>
 
+{{$categories->withQueryString()->appends(['q'=>'SamerAlimoor'])->links()}}
 
 @endsection

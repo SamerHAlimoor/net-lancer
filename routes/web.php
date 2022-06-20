@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Dashboard\CategoriesController as DashboardCategoriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +19,23 @@ Route::get('/', function () {
     return view('layouts.home');
 })->name('home');
 
-Route::get('/categories',[CategoriesController::class,'index'])->name('categories.index'); // new form
-Route::get('/categories/create',[CategoriesController::class,'create'])->name('categories.create'); // new form
-Route::get('/categories/{id}',[CategoriesController::class,'show'])->name('categories.show'); // new form
-Route::post('/categories',[CategoriesController::class,'store'])->name('categories.store'); // new form
-Route::get('/categories/edit/{id}',[CategoriesController::class,'edit'])->name('categories.edit'); // new form
-Route::put('/categories/{id}',[CategoriesController::class,'update'])->name('categories.update'); // new form
-Route::delete('/categories/{id}',[CategoriesController::class,'destroy'])->name('categories.destroy'); // new form
+
+
+Route::group([
+    'prefix'=>'/admin'
+],function(){
+    Route::get('/categories',[CategoriesController::class,'index'])->name('categories.index'); // new form
+    Route::get('/categories/create',[CategoriesController::class,'create'])->name('categories.create'); // new form
+    Route::get('/categories/{id}',[CategoriesController::class,'show'])->name('categories.show'); // new form
+    Route::post('/categories',[CategoriesController::class,'store'])->name('categories.store'); // new form
+    Route::get('/categories/edit/{id}',[CategoriesController::class,'edit'])->name('categories.edit'); // new form
+    Route::put('/categories/{id}',[CategoriesController::class,'update'])->name('categories.update'); // new form
+    Route::delete('/categories/{id}',[CategoriesController::class,'destroy'])->name('categories.destroy'); // new form
+    
+});
+
+
+Route::resource('dashboard/categories',DashboardCategoriesController::class);
 
 
 
